@@ -1,3 +1,4 @@
 # List of untracked files to ignore
 *.slxc
+*.asv
 slprj/*
