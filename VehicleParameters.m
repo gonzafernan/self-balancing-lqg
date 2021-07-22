@@ -27,15 +27,17 @@ tau = 5e-3; % Constante de tiempo modulador de torque
 % and include data that define the behavior of the model. The dictionary 
 % does not store simulation data, which are inputs or outputs of model 
 % simulation that enter and exit Inport and Outport blocks.
-% VehicleParamtersDictionary = ...
-%     Simulink.data.dictionary.create('VehicleParamtersDictionary.sldd');
+VehicleParamtersDictionary = ...
+    Simulink.data.dictionary.open('VehicleParametersDictionary.sldd');
 % Design data section
-% dDataSectObj = getSection(VehicleParamtersDictionary, 'Design Data');
-%addEntry(dDataSectObj, 'mw', mw)
-% addEntry(dDataSectObj, 'Iw', Iw)
-% addEntry(dDataSectObj, 'rw', rw)
-% addEntry(dDataSectObj, 'bw', bw)
-% addEntry(dDataSectObj, 'mb', mb)
-% addEntry(dDataSectObj, 'Ib', Ib)
-% addEntry(dDataSectObj, 'l', l)
-% addEntry(dDataSectObj, 'g', g)
+dDataSectObj = getSection(VehicleParamtersDictionary, 'Design Data');
+addEntry(dDataSectObj, 'mw', mw)
+addEntry(dDataSectObj, 'Iw', Iw)
+addEntry(dDataSectObj, 'rw', rw)
+addEntry(dDataSectObj, 'bw', bw)
+addEntry(dDataSectObj, 'mb', mb)
+addEntry(dDataSectObj, 'Ib', Ib)
+addEntry(dDataSectObj, 'l', l)
+addEntry(dDataSectObj, 'g', g)
+
+saveChanges(VehicleParamtersDictionary)
