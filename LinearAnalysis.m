@@ -1,6 +1,6 @@
 %% Parámetros del sistema: Importar de data dictionary correspondiente
 VehicleParamObj = ...
-Simulink.data.dictionary.open('VehicleParametersDictionary.sldd');
+Simulink.data.dictionary.open('VehicleModelDictionary.sldd');
 dDataSectObj = getSection(VehicleParamObj, 'Design Data');
 childNamesList = dDataSectObj.evalin('who');
 for n = 1:numel(childNamesList)
