@@ -1,13 +1,6 @@
-%% Parámetros del sistema: Importar de data dictionary correspondiente
-VehicleParamObj = ...
-Simulink.data.dictionary.open('VehicleModelDictionary.sldd');
-dDataSectObj = getSection(VehicleParamObj, 'Design Data');
-childNamesList = dDataSectObj.evalin('who');
-for n = 1:numel(childNamesList)
-  hEntry = dDataSectObj.getEntry(childNamesList{n});
-  assignin('base', hEntry.Name, hEntry.getValue);
-end
-clear dDataSectObj childNamesList n hEntry VehicleParamObj
+%% Cargar parámetros del sistema en workspace
+VehicleParameters;
+
 %% Modelo simplificado lineal invariante en el tiempo LTI
 % Ecuación matricial dinámica lineal: E*qdd + F*qd + G*q = hT*u
 E = [
@@ -49,15 +42,17 @@ D = [
     0, 0
 ];
 % Construcción de modelo LTI en tiempo continuo
-sys = ss(A, B, C, D);
-clear E F G hT
+ltiSys = ss(A, B, C, D);
+clear E F G hT A B C D
+
 %% Polos y ceros del modelo LTI, análisis de estabilidad a lazo abierto
 % disp(eig(A));
-disp(pole(sys));
-pzplot(sys);
+disp(pole(ltiSys));
+pzplot(ltiSys);
 grid on
+
 %% Sistema de fase no mínima: Cero real positivo
-HTw_x = tf(sys(1, 1)); HTw_x
+HTw_x = tf(ltiSys(1, 1));
 HTw_x.Name = "H(s)";
 HTw_x.InputName = "T_w";
 HTw_x.OutputName = "x_t";
@@ -65,3 +60,4 @@ disp(pole(HTw_x))
 figure(1)
 pzmap(HTw_x)
 grid on
+clear HTw_x
