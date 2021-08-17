@@ -63,4 +63,5 @@ accel.Bias = zeros(1, 3);           % [Hz]
 
 %% Parámetros actuadores
 MotorParameters.gearRatio = 34;     % Relación de reducción
+MotorParameters.maxTorque = 0.85*9.81/100; % [Nm] Max. torque
 MotorParameters.tau = 5e-3; % Constante de tiempo modulador de torque
