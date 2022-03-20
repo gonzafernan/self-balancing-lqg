@@ -1,21 +1,21 @@
-%% Parámetros del sistema
-% Parámetros de las ruedas del vehículo
-mw = 0.064;         % [Kg]          Masa de la rueda
-Iw = 2.78742e-05;   % [Kg*m^2]      Momento de inercia de la rueda
-rw = 0.032;         % [m]           Radio de la rueda
-bw = 0.01;          % [N*m*s/rad]   Fricción de la rueda con el suelo
-kw = 100000;        % [N/m]         Rigidez del suelo y rueda
+%% System parameters
+% Vehicle wheels' parameters
+mw = 0.064;         % [Kg]          Wheel mass
+Iw = 2.78742e-05;   % [Kg*m^2]      Wheel moment of inertia
+rw = 0.032;         % [m]           Wheel radius
+bw = 0.01;          % [N*m*s/rad]   Friction between the wheel and the ground 
+kw = 100000;        % [N/m]         Ground and wheel stiffness
 VehicleContactForce.w_offset = 0.005;   % Offset for Simscape Multibody simulation
-% Parámetros del chasis del vehículo
-mb = 0.5;           % [Kg]          Masa del cuerpo del robot
-Ib = 0.00110817+0.5*0.06^2;     % [Kg*m^2]      Momento de inercia del chasis vehículo
-l = 0.06;        % [m]           Longitud al CM del robot
-% Otras constantes
-g = 9.80665;        % [m/s^2]       Aceleración de la gravedad
+% Vehicle chasis' parameters (vehicle's body)
+mb = 0.5;           % [Kg]          Chasis mass
+Ib = 0.00110817+0.5*0.06^2;     % [Kg*m^2]      Chasis moment of inertia
+l = 0.06;        % [m]           Longitude to the vehicle's center of mass
+% Other useful constants
+g = 9.80665;        % [m/s^2]       Gravity acceleration
 
-%% Parámetros encoder incremental
-QuadratureEncoder.PPR = 12;             % Cantidad de pulsos por revolución del eje motor
-QuadratureEncoder.ResolutionMult = 4;   % Modo de lectura de los flancos
+%% Incremental encoder parameters
+QuadratureEncoder.PPR = 12;             % pulses per revolution (motor axis)
+QuadratureEncoder.ResolutionMult = 4;   % flank reading mode (resolution multiplier)
 %delta = 2*pi/(QuadratureEncoder.PPR*QuadratureEncoder.ResolutionMult);
 
 %% Gyroscope Specifications
@@ -59,9 +59,9 @@ accel.DLPF_zeta = sqrt(2)/2;
 % Output Data Rate
 accel.Fs = 1000;                 % [Hz]
 
-accel.Bias = zeros(1, 3);           % [Hz]
+accel.Bias = zeros(1, 3);        % [Hz]
 
-%% Parámetros actuadores
-MotorParameters.gearRatio = 34;     % Relación de reducción
-MotorParameters.maxTorque = 0.85*9.81/100; % [Nm] Max. torque
-MotorParameters.tau = 5e-3; % Constante de tiempo modulador de torque
+%% Actuator parameters
+MotorParameters.gearRatio = 34;     % gearbox ratio
+MotorParameters.maxTorque = 0.85*9.81/100; % [Nm] max torque
+MotorParameters.tau = 5e-3;         % torque modulator time constant
